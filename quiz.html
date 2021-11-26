@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>समासः Quiz - Play</title>
     <link rel="stylesheet" href="app.css" />
-    <link rel="stylesheet" href="game.css" />
+    <link rel="stylesheet" href="quiz.css" />
   </head>
   <body>
     <div class="container">
       <div id="loader"></div>
-      <div id="game" class="justify-center flex-column hidden">
+      <div id="quiz" class="justify-center flex-column hidden">
         <div id="hud">
           <div id="hud-item">
             <p id="progressText" class="hud-prefix">
@@ -32,23 +32,30 @@
         </div>
         <h2 id="question"></h2>
         <div class="choice-container">
-          <p class="choice-prefix">A</p>
+          <p class="choice-prefix">क</p>
           <p class="choice-text" data-number="1"></p>
         </div>
         <div class="choice-container">
-          <p class="choice-prefix">B</p>
+          <p class="choice-prefix">ख</p>
           <p class="choice-text" data-number="2"></p>
         </div>
         <div class="choice-container">
-          <p class="choice-prefix">C</p>
+          <p class="choice-prefix">ग</p>
           <p class="choice-text" data-number="3"></p>
         </div>
         <div class="choice-container">
-          <p class="choice-prefix">D</p>
+          <p class="choice-prefix">घ</p>
           <p class="choice-text" data-number="4"></p>
         </div>
+		<div class="button-container">
+		<button type="submit" class="btn" id="nextQuestionBtn"
+		onclick="getNewQuestion(event)" disabled>Next Question</button>
+		<button type="submit" class="btn" id="endQuizBtn"
+		onclick="endQuiz(event)">End Quiz</button>
+		</div>
       </div>
-    </div>
-    <script src="game.js"></script>
+
+
+    <script src="quiz.js"></script>
   </body>
 </html>

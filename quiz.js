@@ -4,7 +4,8 @@ const progressText = document.getElementById('progressText');
 const scoreText = document.getElementById('score');
 const progressBarFull = document.getElementById('progressBarFull');
 const loader = document.getElementById('loader');
-const game = document.getElementById('game');
+const quiz = document.getElementById('quiz');
+const nextQuestionBtn = document.getElementById('nextQuestionBtn');
 let currentQuestion = {};
 let acceptingAnswers = false;
 let score = 0;
@@ -13,6 +14,7 @@ let availableQuesions = [];
 
 let questions = [];
 
+/*
 let res = [
   {
     "vaakya": "गदापाणिः भीमः कौरवैः सह युद्धं कृतवान्",
@@ -49,6 +51,7 @@ let res = [
     ]
   }
 ];
+*/
 
 let samaasas = ['तत्पुरुषः', 'बहुव्रीहिः', 'द्वन्द्वः', 'अव्ययीभावः'];
 let samaasaChoices = {};
@@ -81,16 +84,19 @@ startGame = () => {
     availableQuesions = [...questions];
 	MAX_QUESTIONS = Math.min(MAX_QUESTIONS, availableQuesions.length);
     getNewQuestion();
-    game.classList.remove('hidden');
+    quiz.classList.remove('hidden');
     loader.classList.add('hidden');
-
 };
+
+endQuiz = () => {
+	localStorage.setItem('mostRecentScore', `${score} / questionCounter`);
+        //go to the end page
+        return window.location.assign('end.html');
+}
 
 getNewQuestion = () => {
     if (availableQuesions.length === 0 || questionCounter >= MAX_QUESTIONS) {
-        localStorage.setItem('mostRecentScore', score);
-        //go to the end page
-        return window.location.assign('end.html');
+        endQuiz();
     }
     questionCounter++;
     progressText.innerText = `Question ${questionCounter}/${MAX_QUESTIONS}`;
@@ -104,10 +110,13 @@ getNewQuestion = () => {
     choices.forEach((choice) => {
         const number = choice.dataset['number'];
         choice.innerHTML = currentQuestion['choice' + number];
+		choice.parentElement.classList.remove('correct');
+		choice.parentElement.classList.remove('incorrect');
     });
 
     availableQuesions.splice(questionIndex, 1);
     acceptingAnswers = true;
+	nextQuestionBtn.disabled = true;
 };
 
 choices.forEach((choice) => {
@@ -128,14 +137,7 @@ choices.forEach((choice) => {
 		}
 
         selectedChoice.parentElement.classList.add(classToApply);
-
-        setTimeout(() => {
-            selectedChoice.parentElement.classList.remove(classToApply);
-			if (classToApply !== 'correct') {
-				choices[currentQuestion.answer-1].parentElement.classList.remove('correct');
-			}
-            getNewQuestion();
-        }, 1000);
+		nextQuestionBtn.disabled = false;
     });
 });
 
@@ -144,6 +146,14 @@ incrementScore = (num) => {
     scoreText.innerText = score;
 };
 
-questions = formatQuestions(res);
-// console.log(questions);
-startGame();
+
+fetch('samaasas.json')
+	.then((res) => res.json())
+	.then((res) => {
+		questions = formatQuestions(res);
+		// console.log(questions);
+		startGame();
+	})
+	.catch((err) => {
+        console.error(err);
+    });
