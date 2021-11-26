@@ -89,7 +89,7 @@ startGame = () => {
 };
 
 endQuiz = () => {
-	localStorage.setItem('mostRecentScore', `${score} / questionCounter`);
+	localStorage.setItem('mostRecentScore', `${score} / ${questionCounter}`);
         //go to the end page
         return window.location.assign('end.html');
 }
