@@ -11,8 +11,22 @@
     <div class="container">
       <div id="home" class="flex-center flex-column">
         <h1>समासः Quiz</h1>
-        <a class="btn" href="quiz.html">Start</a>
-        <!-- <a class="btn" href="/highscores.html">High Scores</a> -->
+		<form action="quiz.html">
+			<label for="quiz_type">Quiz Type:</label>
+			<select name="quiz_type" id="quiz_type">
+			<option>मुख्य-समासाः</option>
+			</select>
+			<label for="quiz_type">No. of Questions:</label>
+			<input
+				type="number" min="1" max="4"
+				name="questions"
+				id="questions"
+				value="4"
+			/>
+        <button type="submit" class="btn">
+			Start
+		</button>
+		</form>
       </div>
     </div>
   </body>

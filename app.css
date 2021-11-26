@@ -129,3 +129,22 @@ input {
 input::placeholder {
   color: #aaa;
 }
+
+select {
+  margin-bottom: 1rem;
+  width: 20rem;
+  padding: 1.5rem;
+  font-size: 1.8rem;
+  border: none;
+  box-shadow: 0 0.1rem 1.4rem 0 rgba(86, 185, 235, 0.5);
+}
+
+label {
+  margin-bottom: 1rem;
+  width: 20rem;
+  padding: 1.5rem;
+  font-size: 1.8rem;
+  border: none;
+  /*box-shadow: 0 0.1rem 1.4rem 0 rgba(86, 185, 235, 0.5);*/
+}
+

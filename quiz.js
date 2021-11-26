@@ -14,44 +14,16 @@ let availableQuesions = [];
 
 let questions = [];
 
-/*
-let res = [
-  {
-    "vaakya": "गदापाणिः भीमः कौरवैः सह युद्धं कृतवान्",
-    "samaasas": [
-      {
-        "word": "गदापाणिः",
-        "samaasa": "बहुव्रीहिः",
-        "subtype": "व्यधिकरणः बहुव्रीहिः",
-        "vigraha": "गदा पाणौ यस्य सः"
-      }
-    ]
-  },
-  {
-    "vaakya": "गणेशः सुमुखः एकदन्तः इति च प्रख्यातः",
-    "samaasas": [
-      {
-        "word": "गणेशः",
-        "samaasa": "तत्पुरुषः",
-        "subtype": "षष्ठी-तत्पुरुषः",
-        "vigraha": "गणानाम् ईशः"
-      },
-      {
-        "word": "सुमुखः",
-        "samaasa": "बहुव्रीहिः",
-        "subtype": "प्रादिः बहुव्रीहिः",
-        "vigraha": "शोभनं मुखं यस्य सः"
-      },
-      {
-        "word": "एकदन्तः",
-        "samaasa": "बहुव्रीहिः",
-        "subtype": "समानाधिकरणः बहुव्रीहिः",
-        "vigraha": "एकः दन्तःस् यस्य सः"
-      }
-    ]
-  }
-];
-*/
+let MAX_QUESTIONS = 10;
+let quiz_type= 'मुख्य-समासाः';
+const params = new URLSearchParams(window.location.search);
+//console.log(params);
+if(params.has('questions')) {
+	MAX_QUESTIONS = params.get('questions');
+}
+if(params.has('quiz_type')) {
+	quiz_type = params.get('quiz_type');
+}
 
 let samaasas = ['तत्पुरुषः', 'बहुव्रीहिः', 'द्वन्द्वः', 'अव्ययीभावः'];
 let samaasaChoices = {};
@@ -63,20 +35,21 @@ for (const [index, element] of samaasas.entries()) {
 function formatQuestions(data) {
 	let questions = [];
 	data.forEach((d) => {
-		d.samaasas.forEach((s) => {
-			let q = '"' + d.vaakya + ' ।" <br>' + "अस्मिन् वाक्ये <strong>";
-			q += s.word + "</strong> इति पदे कः समासः ?";
+		if(quiz_type === 'मुख्य-समासाः') {
+			d.samaasas.forEach((s) => {
+				let q = '"' + d.vaakya + ' ।" <br>' + "अस्मिन् वाक्ये <strong>";
+				q += s.word + "</strong> इति पदे कः समासः ?";
 
-			let answer = samaasas.indexOf(s.samaasa) + 1;
-			questions.push({"question" : q, "answer": answer, ...samaasaChoices});
-		});
+				let answer = samaasas.indexOf(s.samaasa) + 1;
+				questions.push({"question" : q, "answer": answer, ...samaasaChoices});
+			});
+		}
 	});
 	return questions;
 }
 
 //CONSTANTS
 const CORRECT_BONUS = 1;
-let MAX_QUESTIONS = 10;
 
 startGame = () => {
     questionCounter = 0;
@@ -146,7 +119,47 @@ incrementScore = (num) => {
     scoreText.innerText = score;
 };
 
-
+/*
+let res = [
+  {
+    "vaakya": "गदापाणिः भीमः कौरवैः सह युद्धं कृतवान्",
+    "samaasas": [
+      {
+        "word": "गदापाणिः",
+        "samaasa": "बहुव्रीहिः",
+        "subtype": "व्यधिकरणः बहुव्रीहिः",
+        "vigraha": "गदा पाणौ यस्य सः"
+      }
+    ]
+  },
+  {
+    "vaakya": "गणेशः सुमुखः एकदन्तः इति च प्रख्यातः",
+    "samaasas": [
+      {
+        "word": "गणेशः",
+        "samaasa": "तत्पुरुषः",
+        "subtype": "षष्ठी-तत्पुरुषः",
+        "vigraha": "गणानाम् ईशः"
+      },
+      {
+        "word": "सुमुखः",
+        "samaasa": "बहुव्रीहिः",
+        "subtype": "प्रादिः बहुव्रीहिः",
+        "vigraha": "शोभनं मुखं यस्य सः"
+      },
+      {
+        "word": "एकदन्तः",
+        "samaasa": "बहुव्रीहिः",
+        "subtype": "समानाधिकरणः बहुव्रीहिः",
+        "vigraha": "एकः दन्तःस् यस्य सः"
+      }
+    ]
+  }
+];
+const myPromise = new Promise((resolve, reject) => {
+	resolve(res);
+})
+*/
 fetch('samaasas.json')
 	.then((res) => res.json())
 	.then((res) => {
