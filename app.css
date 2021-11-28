@@ -29,13 +29,13 @@ h1 > span {
   font-weight: 500;
 }
 
-h2 {
+.question {
   font-size: 4.2rem;
   margin-bottom: 4rem;
   font-weight: 400;
 }
 
-h2 > strong {
+.question > strong {
 	text-decoration: underline;
 }
 
