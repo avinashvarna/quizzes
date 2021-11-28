@@ -34,7 +34,7 @@ if(params.has('quiz_type')) {
 		alert("Selected quiz type not recognized. Defaulting to " + quiz_type);
 	}
 }
-json_file = quiz_type_files[quiz_type];
+json_file = quiz_type_files.get(quiz_type);
 
 startGame = () => {
     questionCounter = 0;
