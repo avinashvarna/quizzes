@@ -15,7 +15,7 @@ let availableQuesions = [];
 
 let questions = [];
 let MAX_QUESTIONS = 10;
-let quiz_type = null;
+let quiz_name = null;
 
 startGame = () => {
     questionCounter = 0;
@@ -92,14 +92,14 @@ incrementScore = () => {
     scoreText.innerText = score;
 };
 
-const quiz_type_files = new Map();
+const quiz_name_files = new Map();
 
 fetch('quizzes.json')
 .then((res) => res.json())
 .then((res) => {
-	quiz_type = res[0]["quiz_type"];
+	quiz_name = res[0]["name"];
 	res.forEach((quiz) => {
-		quiz_type_files.set(quiz["quiz_type"], quiz["file_path"]);
+		quiz_name_files.set(quiz["name"], quiz["file"]);
 		});
 })
 .then(() => {
@@ -108,15 +108,15 @@ fetch('quizzes.json')
 	if(params.has('questions')) {
 		MAX_QUESTIONS = params.get('questions');
 	}
-	if(params.has('quiz_type')) {
-		let temp = params.get('quiz_type');
-		if(quiz_type_files.has(temp)) {
-			quiz_type = temp;
+	if(params.has('quiz_name')) {
+		let temp = params.get('quiz_name');
+		if(quiz_name_files.has(temp)) {
+			quiz_name = temp;
 		} else {
-			alert("Selected quiz type not recognized. Defaulting to " + quiz_type);
+			alert("Selected quiz type not recognized. Defaulting to " + quiz_name);
 		}
 	}
-	return quiz_type_files.get(quiz_type);
+	return quiz_name_files.get(quiz_name);
 })
 .then((file_path) => {
 	fetch(file_path)

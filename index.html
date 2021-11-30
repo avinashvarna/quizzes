@@ -12,10 +12,10 @@
       <div id="home" class="flex-center flex-column">
         <h1>समासः Quiz</h1>
 		<form action="quiz.html">
-			<label for="quiz_type">Quiz Type:</label>
-			<select name="quiz_type" id="quiz_type" onChange="setMax(event)">
+			<label for="quiz_name">Quiz Type:</label>
+			<select name="quiz_name" id="quiz_name" onChange="setMax(event)">
 			</select>
-			<label for="quiz_type">No. of Questions:</label>
+			<label for="questions">No. of Questions:</label>
 			<input
 				type="number" min="1" max="8"
 				name="questions"
@@ -30,22 +30,22 @@
     </div>
   </body>
   <script>
-	const quiz_type_questions = new Map();
+	const quiz_name_questions = new Map();
 
 	fetch('quizzes.json')
 	.then((res) => res.json())
 	.then((res) => {
-		var select = document.getElementById('quiz_type');
+		var select = document.getElementById('quiz_name');
 		res.forEach((quiz, index) => {
-			select[index] = (new Option(quiz["quiz_type"]));
-			quiz_type_questions.set(quiz["quiz_type"], quiz["num_questions"]);
+			select[index] = (new Option(quiz["name"]));
+			quiz_name_questions.set(quiz["name"], quiz["num_questions"]);
 		});
 	});
 	function setMax(event) {
-		var select = document.getElementById('quiz_type');
+		var select = document.getElementById('quiz_name');
 		var questions = document.getElementById('questions');
-		var quiz_type = select.value;
-		questions.max = quiz_type_questions.get(quiz_type);
+		var quiz_name = select.value;
+		questions.max = quiz_name_questions.get(quiz_name);
 	}
   </script>
 </html>
