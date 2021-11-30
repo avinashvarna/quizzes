@@ -15,26 +15,7 @@ let availableQuesions = [];
 
 let questions = [];
 let MAX_QUESTIONS = 10;
-let quiz_type= 'मुख्य-समासाः';
-
-const quiz_type_files = new Map()
-	.set('मुख्य-समासाः', 'mukhya_samaasaaH.json')
-	.set('समास-प्रभेदाः', 'samaasa_prabhedaaH.json');
-
-// Parse query params to find quiz type and number of questions
-const params = new URLSearchParams(window.location.search);
-if(params.has('questions')) {
-	MAX_QUESTIONS = params.get('questions');
-}
-if(params.has('quiz_type')) {
-	let temp = params.get('quiz_type');
-	if(quiz_type_files.has(temp)) {
-		quiz_type = temp;
-	} else {
-		alert("Selected quiz type not recognized. Defaulting to " + quiz_type);
-	}
-}
-json_file = quiz_type_files.get(quiz_type);
+let quiz_type = null;
 
 startGame = () => {
     questionCounter = 0;
@@ -111,12 +92,43 @@ incrementScore = () => {
     scoreText.innerText = score;
 };
 
-fetch(json_file)
+const quiz_type_files = new Map();
+
+fetch('quizzes.json')
+.then((res) => res.json())
+.then((res) => {
+	quiz_type = res[0]["quiz_type"];
+	res.forEach((quiz) => {
+		quiz_type_files.set(quiz["quiz_type"], quiz["file_path"]);
+		});
+})
+.then(() => {
+	// Parse query params to find quiz type and number of questions
+	const params = new URLSearchParams(window.location.search);
+	if(params.has('questions')) {
+		MAX_QUESTIONS = params.get('questions');
+	}
+	if(params.has('quiz_type')) {
+		let temp = params.get('quiz_type');
+		if(quiz_type_files.has(temp)) {
+			quiz_type = temp;
+		} else {
+			alert("Selected quiz type not recognized. Defaulting to " + quiz_type);
+		}
+	}
+	return quiz_type_files.get(quiz_type);
+})
+.then((file_path) => {
+	fetch(file_path)
 	.then((res) => res.json())
 	.then((res) => {
 		questions = res;
 		startGame();
 	})
 	.catch((err) => {
-        console.error(err);
-    });
+		console.error(err);
+	});
+})
+.catch((err) => {
+	console.error(err);
+});

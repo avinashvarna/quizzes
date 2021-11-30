@@ -13,9 +13,7 @@
         <h1>समासः Quiz</h1>
 		<form action="quiz.html">
 			<label for="quiz_type">Quiz Type:</label>
-			<select name="quiz_type" id="quiz_type">
-			<option>मुख्य-समासाः</option>
-			<option>समास-प्रभेदाः</option>
+			<select name="quiz_type" id="quiz_type" onChange="setMax(event)">
 			</select>
 			<label for="quiz_type">No. of Questions:</label>
 			<input
@@ -31,4 +29,23 @@
       </div>
     </div>
   </body>
+  <script>
+	const quiz_type_questions = new Map();
+
+	fetch('quizzes.json')
+	.then((res) => res.json())
+	.then((res) => {
+		var select = document.getElementById('quiz_type');
+		res.forEach((quiz, index) => {
+			select[index] = (new Option(quiz["quiz_type"]));
+			quiz_type_questions.set(quiz["quiz_type"], quiz["num_questions"]);
+		});
+	});
+	function setMax(event) {
+		var select = document.getElementById('quiz_type');
+		var questions = document.getElementById('questions');
+		var quiz_type = select.value;
+		questions.max = quiz_type_questions.get(quiz_type);
+	}
+  </script>
 </html>

@@ -1,0 +1,11 @@
+[
+  {
+    "quiz_type":"मुख्य-समासाः",
+	"file_path":'mukhya_samaasaaH.json',
+	"num_questions":8
+  },
+  {
+    "quiz_type":"समास-प्रभेदाः",
+	"file_path":'samaasa_prabhedaaH.json',
+	"num_questions":6}
+];
