@@ -7,6 +7,11 @@
   {
     "name": "समास-प्रभेदाः",
     "file": "data/samaasa_prabhedaaH.json",
-    "num_questions": 6
+    "num_questions": 8
+  },
+  {
+    "name": "श्लोक-सुभाषित-प्रश्नाः",
+    "file": "data/shloka_subhAshita_prashnaaH.json",
+    "num_questions": 65
   }
 ]
