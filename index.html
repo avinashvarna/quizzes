@@ -15,12 +15,13 @@
 			<label for="quiz_name">Quiz Type:</label>
 			<select name="quiz_name" id="quiz_name" onChange="setMax(event)">
 			</select>
+			<label id="max_questions"></label>
 			<label for="questions">No. of Questions:</label>
 			<input
-				type="number" min="1" max="8"
+				type="number" min="1" max="4"
 				name="questions"
 				id="questions"
-				value="8"
+				value="4"
 			/>
         <button type="submit" class="btn">
 			Start
@@ -40,12 +41,16 @@
 			select[index] = (new Option(quiz["name"]));
 			quiz_name_questions.set(quiz["name"], quiz["num_questions"]);
 		});
+		setMax();
 	});
 	function setMax(event) {
 		var select = document.getElementById('quiz_name');
 		var questions = document.getElementById('questions');
+		var max_questions = document.getElementById('max_questions');
 		var quiz_name = select.value;
-		questions.max = quiz_name_questions.get(quiz_name);
+		var max = quiz_name_questions.get(quiz_name);
+		questions.max = max;
+		max_questions.innerText = "(Max. Questions: " + quiz_name_questions.get(quiz_name) + ")";
 	}
   </script>
 </html>
