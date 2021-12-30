@@ -9,7 +9,7 @@ Created on Wed Dec 29 19:23:26 2021
 import datetime
 import os
 import json
-from glob import glob
+import pathlib
 
 
 if __name__ == "__main__":
@@ -17,15 +17,15 @@ if __name__ == "__main__":
 
     quizzes = []
 
-    files = glob('../data/*.json')
+    files = pathlib.Path('data').glob('*.json')
     for file in files:
         with open(file, encoding='utf-8') as f:
             quiz = json.load(f)
             quiz.pop('questions')
-            quiz['file'] = os.path.relpath(file, start='..')
+            quiz['file'] = file.as_posix()
             quizzes.append(quiz)
 
-    with open('../build/quizzes.json', 'w', encoding='utf-8') as f:
+    with open('build/quizzes.json', 'w', encoding='utf-8') as f:
         json.dump(quizzes, f, ensure_ascii=False, indent=2)
 
     _end_time = datetime.datetime.now()
