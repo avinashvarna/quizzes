@@ -1,0 +1,32 @@
+[
+  {
+    "topic": "समासः",
+    "name": "समास-प्रभेदाः",
+    "file": "data/samaasa_prabhedaaH.json"
+  },
+  {
+    "topic": "समासः",
+    "name": "मुख्य-समासाः",
+    "file": "data/mukhya_samaasaaH.json"
+  },
+  {
+    "topic": "श्लोकावगमनम्",
+    "name": "श्लोक-सुभाषित-प्रश्नाः",
+    "file": "data/shloka_subhAshita_prashnaaH.json"
+  },
+  {
+    "topic": "स्वर-सन्धिः",
+    "name": "स्वर-सन्धि-नाम (पदच्छेदं विना)",
+    "file": "data/svara_sandhi_without_split.json"
+  },
+  {
+    "topic": "स्वर-सन्धिः",
+    "name": "स्वर-सन्धि-नाम (पदच्छेदः दत्तः)",
+    "file": "data/svara_sandhi_with_split.json"
+  },
+  {
+    "topic": "स्वर-सन्धिः",
+    "name": "स्वर-सन्धिः - पदच्छेदः",
+    "file": "data/svara_sandhi_viccheda.json"
+  }
+]
