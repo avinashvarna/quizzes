@@ -122,7 +122,7 @@ fetch('quizzes.json')
 	fetch(file_path)
 	.then((res) => res.json())
 	.then((res) => {
-		questions = res;
+		questions = res.questions;
 		startGame();
 	})
 	.catch((err) => {
