@@ -7,7 +7,6 @@ Created on Wed Dec 29 19:23:26 2021
 
 
 import datetime
-import os
 import json
 import pathlib
 
@@ -24,8 +23,11 @@ if __name__ == "__main__":
             questions = quiz.pop('questions')
             quiz['file'] = file.as_posix()
             quiz['num_questions'] = len(questions)
+            if 'topic' not in quiz:
+                quiz['topic'] = 'विविधानि'
             quizzes.append(quiz)
 
+    quizzes.sort(key=lambda x: x['topic'])
     with open('build/quizzes.json', 'w', encoding='utf-8') as f:
         json.dump(quizzes, f, ensure_ascii=False, indent=2)
 
