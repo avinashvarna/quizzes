@@ -1,9 +1,9 @@
 [
   {
-    "topic": "समासः",
-    "name": "समास-प्रभेदाः",
-    "file": "data/samaasa_prabhedaaH.json",
-    "num_questions": 8
+    "topic": "श्लोकावगमनम्",
+    "name": "श्लोक-सुभाषित-प्रश्नाः",
+    "file": "data/shloka_subhAshita_prashnaaH.json",
+    "num_questions": 198
   },
   {
     "topic": "समासः",
@@ -12,21 +12,21 @@
     "num_questions": 8
   },
   {
-    "topic": "श्लोकावगमनम्",
-    "name": "श्लोक-सुभाषित-प्रश्नाः",
-    "file": "data/shloka_subhAshita_prashnaaH.json",
-    "num_questions": 198
-  },
-  {
-    "topic": "स्वर-सन्धिः",
-    "name": "स्वर-सन्धि-नाम (पदच्छेदं विना)",
-    "file": "data/svara_sandhi_without_split.json",
-    "num_questions": 452
+    "topic": "समासः",
+    "name": "समास-प्रभेदाः",
+    "file": "data/samaasa_prabhedaaH.json",
+    "num_questions": 8
   },
   {
     "topic": "स्वर-सन्धिः",
     "name": "स्वर-सन्धि-नाम (पदच्छेदः दत्तः)",
     "file": "data/svara_sandhi_with_split.json",
+    "num_questions": 452
+  },
+  {
+    "topic": "स्वर-सन्धिः",
+    "name": "स्वर-सन्धि-नाम (पदच्छेदं विना)",
+    "file": "data/svara_sandhi_without_split.json",
     "num_questions": 452
   },
   {
